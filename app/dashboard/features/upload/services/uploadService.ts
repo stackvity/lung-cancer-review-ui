@@ -1,6 +1,7 @@
-// app/features/upload/services/uploadService.ts
-import { apiClient } from "../../../../lib/apiClient";
-import { UploadResponseData } from "../../../../types/api"; // Importing API types
+// app/dashboard/features/upload/services/uploadService.ts  <- Adjusted file path to align with incorrect import
+
+import { apiClient } from "../../../../lib/apiClient"; // Adjusted import path for apiClient
+import { UploadResponseData } from "../../../../types/api"; // Adjusted import path for types
 
 /**
  * @function processDocuments
@@ -10,11 +11,13 @@ import { UploadResponseData } from "../../../../types/api"; // Importing API typ
  * @returns {Promise<UploadResponseData>} - Promise resolving to the API response data.
  * @throws {Error} - Throws an error if the API call fails, including specific error messages based on HTTP status codes.
  */
-export const processDocuments = async (
+export const uploadFiles = async (
+  // Renamed to uploadFiles to align with FileUpload.tsx import
   formData: FormData
 ): Promise<UploadResponseData> => {
   try {
     const response = await apiClient.post("/upload", formData, {
+      // Assuming "/upload" is still the correct API endpoint
       headers: {
         "Content-Type": "multipart/form-data",
       },

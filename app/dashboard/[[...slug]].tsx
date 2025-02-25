@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import AccessLinkGuard from "@/layouts/AccessLinkGuard";
+import AccessLinkGuard from "@/components/layouts/AccessLinkGuard";
 import FileUpload from "@/components/shared/FileUpload";
 import ImageViewer from "@/components/shared/ImageViewer";
 import FindingsSummary from "@/components/shared/FindingsSummary";
-import ReportPreview from "@/components/shared/ReportPreview";
+import ReportPreview from "@/components/shared/ReportPreview/ReportPreview"; // Corrected import path
 import Disclaimer from "@/components/ui/Disclaimer";
 import ExternalResources from "@/components/shared/ExternalResources";
 import { Button } from "@/components/ui/button";
@@ -156,7 +156,7 @@ const DashboardPage: React.FC = () => {
           <div className="flex items-center justify-center w-full h-full bg-gray-200">
             <Loader2
               className="animate-spin text-gray-600 h-8 w-8"
-              aria-label={t("dashboard.processing_documents")}
+              aria-label={t("common.loading")}
             />{" "}
             {/* Added aria-label for accessibility */}
           </div>
