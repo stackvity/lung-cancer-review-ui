@@ -1,4 +1,4 @@
-"use client";
+"use client"; // <- Add this at the top
 
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
