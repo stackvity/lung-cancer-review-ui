@@ -1,0 +1,70 @@
+services:
+  - type: web
+    name: lung-cancer-review-frontend
+    env: docker
+    region: sgp
+    plan: professional-1
+    dockerfilePath: Dockerfile
+    buildCommand: ""
+    startCommand: "npm start"
+    healthCheckPath: /api/health
+    autoDeploy: true
+    numInstances: 2
+    envVars:
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: "https://your-backend-api-url.onrender.com/api"
+      - key: NEXT_PUBLIC_VERCEL_URL
+        value: "https://your-frontend-vercel-url.vercel.app"
+      - key: NEXT_PUBLIC_SENTRY_DSN
+        sync: false
+      - key: NEXT_PUBLIC_GA_TRACKING_ID
+        sync: false
+
+alerting:
+  - type: component-cpu
+    threshold: 90
+    period: 5m
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com
+  - type: component-memory
+    threshold: 90
+    period: 5m
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com
+  - type: http-status-5xx-errors
+    threshold: 5
+    period: 1m
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com
+  - type: response-latency
+    threshold: 500
+    period: 1m
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com
+  - type: deployment-failure
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com
+  - type: postgresql-cpu
+    threshold: 90
+    dbName: lung-cancer-review-db
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com
+  - type: postgresql-memory
+    threshold: 90
+    dbName: lung-cancer-review-db
+    notifications:
+      - type: email
+        emails:
+          - devops@example.com

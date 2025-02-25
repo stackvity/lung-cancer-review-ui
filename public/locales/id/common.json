@@ -1,0 +1,159 @@
+{
+  "app_title": "Sistem Tinjauan AI Kanker Paru-Paru",
+  "common": {
+    "loading": "Memuat...",
+    "error": "Kesalahan",
+    "success": "Berhasil",
+    "please_wait": "Mohon tunggu...",
+    "an_error_occurred": "Terjadi kesalahan. Silakan coba lagi nanti.",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "submit": "Kirim",
+    "download": "Unduh",
+    "report_issue": "Laporkan Masalah",
+    "remove": "Hapus",
+    "optional": "(Opsional)",
+    "data_not_available": "Data tidak tersedia"
+  },
+  "disclaimer": {
+    "title": "Penafian Penting",
+    "text": "Sistem Tinjauan AI Kanker Paru-Paru hanya menyediakan informasi pendahuluan dan BUKAN pengganti nasihat medis profesional, diagnosis, atau perawatan. Informasi yang disajikan di sini dihasilkan oleh AI dan HARUS ditinjau dan dikonfirmasi oleh dokter yang квалифицированный. Jangan membuat keputusan terkait kesehatan berdasarkan informasi ini saja. Silakan berkonsultasi dengan penyedia layanan kesehatan Anda untuk masalah medis apa pun."
+  },
+  "upload": {
+    "title": "Unggah Dokumen Medis",
+    "instructions": "Silakan unggah dokumen medis Anda terkait kesehatan paru-paru Anda. Ini mungkin termasuk:",
+    "cxr": "Rontgen Dada (CXR) - format DICOM",
+    "ct": "Pemindaian CT - format DICOM",
+    "petct": "Pemindaian PET/CT - format DICOM",
+    "pathology": "Laporan Patologi - format PDF, JPEG, PNG",
+    "radiology": "Laporan Radiologi - format PDF, JPEG, PNG",
+    "lab": "Hasil Lab - format CSV (atau masukkan secara manual di bawah)",
+    "dragOrClick": "Seret dan lepas file di sini atau klik untuk mencari",
+    "dropHere": "Lepaskan file di sini",
+    "allowedTypes": "Jenis file yang diizinkan: DICOM, PDF, JPEG, PNG, CSV",
+    "maxSize": "Ukuran file maksimum: 50MB per file",
+    "uploadedFiles": "File yang Diunggah:",
+    "remove": "Hapus",
+    "disclaimer": "Saya mengerti bahwa informasi yang disediakan oleh aplikasi ini bersifat pendahuluan dan <0>harus</0> ditinjau dan dikonfirmasi oleh dokter yang memenuhi syarat. Saya tidak akan membuat keputusan terkait kesehatan hanya berdasarkan informasi ini.",
+    "file_too_large": "File terlalu besar. Ukuran maksimum adalah 50MB.",
+    "file_invalid_type": "File memiliki jenis file yang tidak valid.",
+    "upload_failed": "Unggah file gagal."
+  },
+  "dashboard": {
+    "title": "Dasbor Pasien",
+    "access_link_invalid": "Tautan Akses Tidak Valid",
+    "access_link_expired_message": "Tautan akses tidak valid, kedaluwarsa, atau sudah digunakan. Silakan hubungi penyedia layanan kesehatan Anda untuk tautan baru.",
+    "processing_documents": "Memproses dokumen...",
+    "findings_summary_title": "Ringkasan Temuan",
+    "no_findings": "Belum ada temuan yang tersedia.",
+    "report_title": "Laporan Pasien",
+    "download_report_button": "Unduh Laporan",
+    "ai_unavailable_contingency": "Analisis AI sedang tidak tersedia untuk sementara. Silakan coba lagi nanti."
+  },
+  "findings": {
+    "title": "Ringkasan Temuan AI",
+    "noFindings": "Tidak ada temuan yang diidentifikasi oleh analisis AI."
+  },
+  "report": {
+    "generate_report": "Buat Laporan",
+    "report_preview": "Pratinjau Laporan"
+  },
+  "auth": {
+    "login_title": "Login Admin",
+    "username_label": "Nama Pengguna",
+    "password_label": "Kata Sandi",
+    "login_button": "Login",
+    "invalid_credentials": "Nama pengguna atau kata sandi tidak valid.",
+    "network_error": "Kesalahan jaringan. Periksa koneksi internet Anda."
+  },
+  "admin_dashboard": {
+    "title": "Dasbor Admin",
+    "system_monitoring": "Pemantauan Sistem",
+    "audit_logs": "Log Audit",
+    "content_management": "Manajemen Konten",
+    "prompt_management": "Manajemen Prompt",
+    "backup_restore": "Backup & Pulihkan",
+    "generate_access_link": "Buat Tautan Akses"
+  },
+  "monitoring": {
+    "title": "Dasbor Pemantauan Sistem",
+    "cpu_usage": "Penggunaan CPU",
+    "memory_usage": "Penggunaan Memori",
+    "network_traffic": "Lalu Lintas Jaringan",
+    "api_usage": "Penggunaan API",
+    "error_rates": "Tingkat Kesalahan",
+    "metrics_unavailable": "Data metrik saat ini tidak tersedia."
+  },
+  "audit_logs": {
+    "title": "Penampil Log Audit",
+    "log_entries": "Entri Log",
+    "timestamp": "Timestamp",
+    "action": "Aksi",
+    "details": "Detail",
+    "search": "Cari log...",
+    "no_logs": "Tidak ada log audit yang ditemukan."
+  },
+  "content_management": {
+    "title": "Manajemen Konten",
+    "content_items": "Item Konten",
+    "edit_content": "Edit Konten",
+    "submit_for_review": "Kirim untuk Ditinjau",
+    "content_updated": "Konten berhasil diperbarui.",
+    "pending_review": "Menunggu Peninjauan",
+    "approved": "Disetujui",
+    "rejected": "Ditolak",
+    "publish": "Publikasikan",
+    "content_published": "Konten berhasil dipublikasikan.",
+    "review_comments": "Komentar Peninjauan:",
+    "approve": "Setuju",
+    "reject": "Tolak",
+    "no_content_items": "Tidak ada item konten yang tersedia."
+  },
+  "prompt_management": {
+    "title": "Manajemen Prompt",
+    "prompts": "Prompt",
+    "edit_prompt": "Edit Prompt",
+    "create_new_version": "Buat Versi Baru",
+    "activate_version": "Aktifkan Versi",
+    "prompt_updated": "Prompt berhasil diperbarui.",
+    "pending_review": "Menunggu Peninjauan",
+    "approved": "Disetujui",
+    "rejected": "Ditolak",
+    "prompt_activated": "Versi prompt diaktifkan.",
+    "review_comments": "Komentar Peninjauan:",
+    "approve": "Setuju",
+    "reject": "Tolak",
+    "no_prompts": "Tidak ada prompt yang tersedia."
+  },
+  "backup_restore": {
+    "title": "Backup & Pulihkan",
+    "manual_backup": "Backup Manual",
+    "automated_backups": "Backup Otomatis",
+    "restore_database": "Pulihkan Database",
+    "backup_initiated": "Backup berhasil dimulai.",
+    "restore_initiated": "Pemulihan berhasil dimulai.",
+    "backup_status": "Status Backup:",
+    "restore_status": "Status Pulihkan:",
+    "backup_completed": "Backup berhasil diselesaikan.",
+    "restore_completed": "Pemulihan berhasil diselesaikan.",
+    "backup_failed": "Backup gagal.",
+    "restore_failed": "Pemulihan gagal.",
+    "no_backups": "Tidak ada backup yang tersedia."
+  },
+  "access_link": {
+    "title": "Buat Tautan Akses",
+    "patient_email": "Email Pasien (Opsional)",
+    "generate_link": "Buat Tautan Akses",
+    "link_generated": "Tautan akses berhasil dibuat.",
+    "send_email": "Kirim melalui Email",
+    "email_sent": "Email berhasil dikirim."
+  },
+  "report_issue_form": {
+    "title": "Laporkan Masalah Sistem",
+    "description": "Silakan jelaskan masalah yang Anda alami. Jangan sertakan PII apa pun.",
+    "issue_description_label": "Deskripsi Masalah",
+    "submit_report": "Kirim Laporan",
+    "report_submitted_success": "Terima kasih telah mengirimkan laporan masalah. Kami akan meninjau laporan Anda dan mengatasi masalah tersebut sesegera mungkin.",
+    "report_submitted_error": "Kesalahan mengirimkan laporan masalah. Silakan coba lagi nanti."
+  }
+}
