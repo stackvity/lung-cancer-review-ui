@@ -1,4 +1,4 @@
-// app/layouts/AccessLinkGuard.tsx
+// app/components/layouts/AccessLinkGuard.tsx
 "use client";
 
 import React from "react";
