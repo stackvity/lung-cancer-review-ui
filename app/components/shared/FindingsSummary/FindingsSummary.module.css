@@ -1,0 +1,30 @@
+/* app/components/shared/FindingsSummary/FindingsSummary.module.css */
+
+.findingItem {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(
+    --muted
+  ); /* Example background color from your theme - adjust as needed */
+}
+
+.findingBadge {
+  margin-bottom: 0.5rem;
+  background-color: var(
+    --secondary
+  ); /* Example badge color - adjust as needed */
+  color: var(--secondary-foreground);
+}
+
+.findingDescription {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--foreground); /* Text color from your theme */
+}
+
+.findingLocation {
+  font-size: 0.9rem;
+  color: var(--muted-foreground); /* Muted text color for location */
+  margin-top: 0.25rem;
+}

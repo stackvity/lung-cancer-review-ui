@@ -1,7 +1,6 @@
-// app/dashboard/features/upload/services/uploadService.ts  <- Adjusted file path to align with incorrect import
-
-import { apiClient } from "../../../../lib/apiClient"; // Adjusted import path for apiClient
-import { UploadResponseData } from "../../../../types/api"; // Adjusted import path for types
+// app/features/upload/services/uploadService.ts
+import { apiClient } from "@/lib/apiClient"; // Adjust path to apiClient if necessary
+import { UploadResponseData } from "@/types/api"; // Adjust path to types/api.ts if necessary
 
 /**
  * @function processDocuments
@@ -9,50 +8,39 @@ import { UploadResponseData } from "../../../../types/api"; // Adjusted import p
  * @description Processes document upload to the backend.
  * @param {FormData} formData - Form data containing files and linkId.
  * @returns {Promise<UploadResponseData>} - Promise resolving to the API response data.
- * @throws {Error} - Throws an error if the API call fails, including specific error messages based on HTTP status codes.
+ * @throws {Error} - Throws an error if the API call fails.
  */
-export const uploadFiles = async (
-  // Renamed to uploadFiles to align with FileUpload.tsx import
+export const processDocuments = async (
   formData: FormData
 ): Promise<UploadResponseData> => {
   try {
     const response = await apiClient.post("/upload", formData, {
-      // Assuming "/upload" is still the correct API endpoint
+      // Adjust endpoint if necessary
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
     if (!response.ok) {
-      let message = "Document processing failed"; // Default error message
-      const errorData = await response.json();
-      if (response.status === 400) {
-        message =
-          errorData?.detail ||
-          "Invalid request data. Please check your inputs.";
-      } else if (response.status === 413) {
-        message =
-          errorData?.detail || "Payload too large. Please reduce file sizes.";
-      } else if (response.status === 500) {
-        message =
-          errorData?.detail ||
-          "Internal server error during document processing.";
-      }
-      console.error("API Error in processDocuments:", errorData); // Log detailed error response
-      throw new Error(message);
+      // Handle non-2xx responses (error statuses)
+      const errorDetail = await response.json(); // Assuming error response is JSON
+      console.error("Upload API error:", errorDetail);
+      throw new Error(
+        `Upload failed: ${response.status} - ${
+          errorDetail.message || response.statusText
+        }`
+      );
     }
 
-    const data = await response.json();
+    const data = await response.json(); // Assuming success response is also JSON
     return data as UploadResponseData;
   } catch (error: unknown) {
-    console.error("Error in processDocuments:", error); // Catch network errors or errors during JSON parsing
-    if (error instanceof Error) {
-      throw new Error(
-        error.message ||
-          "Document processing failed due to an unexpected error."
-      );
-    } else {
-      throw new Error("Document processing failed due to an unexpected error.");
-    }
+    // Handle network errors or errors during json parsing
+    console.error("Error processing upload request:", error);
+    throw new Error(
+      `Failed to process upload: ${
+        error instanceof Error ? error.message : "Network error"
+      }`
+    );
   }
 };

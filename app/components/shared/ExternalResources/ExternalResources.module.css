@@ -1,0 +1,40 @@
+/* app/components/shared/ExternalResources/ExternalResources.module.css */
+
+.resourceItem {
+  margin-bottom: 0.75rem;
+  padding-left: 0; /* Reset default list padding */
+}
+
+.resourceLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Remove default underline */
+  color: inherit; /* Inherit text color */
+  transition: color 0.2s;
+}
+
+.resourceLink:hover,
+.resourceLink:focus {
+  color: var(--primary); /* Example hover color - adjust with your theme */
+  text-decoration: underline; /* Add underline on hover/focus for accessibility */
+}
+
+.resourceIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  color: var(
+    --muted-foreground
+  ); /* Example icon color - adjust with your theme */
+}
+
+.resourceName {
+  font-weight: 500; /* Example font weight - adjust as needed */
+}
+
+.resourceDescription {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-top: 0.25rem;
+  padding-left: 1.75rem; /* Indent description to align with text, not icon */
+}

@@ -1,0 +1,31 @@
+/* app/components/ui/Disclaimer/Disclaimer.module.css */
+
+.disclaimerContainer {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--warning); /* Example border color - adjust with your theme */
+  border-radius: 0.5rem;
+  background-color: var(
+    --warning-light
+  ); /* Example background color - adjust with your theme */
+  color: var(--foreground); /* Adjust text color as needed */
+}
+
+.disclaimerTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: var(
+    --warning-foreground
+  ); /* Example title color - adjust with your theme */
+}
+
+.disclaimerText {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.disclaimerText b {
+  font-weight: bolder; /* Or use Tailwind's 'font-extrabold' if configured */
+  color: var(--destructive); /* Example for strong emphasis */
+}

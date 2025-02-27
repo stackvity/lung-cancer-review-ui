@@ -1,0 +1,17 @@
+/* app/components/shared/ImageViewer/ImageViewer.module.css */
+
+.imageViewerContainer {
+  position: relative; /* For positioning annotations if needed */
+  width: 100%;
+  height: auto; /* Adjust as needed */
+  overflow: hidden; /* Or 'auto' if scrollable */
+  border: 1px solid #ccc; /* Example border */
+}
+
+.imageViewerImage {
+  display: block; /* Ensure image takes full width of container */
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Add more styles for annotations, controls, etc. as needed */

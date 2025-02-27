@@ -3,16 +3,16 @@
 import React, { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import AccessLinkGuard from "@/components/layouts/AccessLinkGuard";
-import FileUpload from "@/components/shared/FileUpload";
-import ImageViewer from "@/components/shared/ImageViewer";
-import FindingsSummary from "@/components/shared/FindingsSummary";
-import ReportPreview from "@/components/shared/ReportPreview/ReportPreview"; // Corrected import path
-import Disclaimer from "@/components/ui/Disclaimer";
-import ExternalResources from "@/components/shared/ExternalResources";
+import FileUpload from "@/components/shared/FileUpload/FileUpload";
+import ImageViewer from "@/components/shared/ImageViewer/ImageViewer"; // Corrected import path
+import FindingsSummary from "@/components/shared/FindingsSummary/FindingsSummary"; // Corrected import path - and now component exists!
+import ReportPreview from "@/components/shared/ReportPreview/ReportPreview";
+import Disclaimer from "@/components/ui/Disclaimer/Disclaimer"; // Corrected import path - and now component exists!
+import ExternalResources from "@/components/shared/ExternalResources/ExternalResources"; // Corrected import path - and now component exists!
 import { Button } from "@/components/ui/button";
 import { useAccessLink } from "@/hooks/useAccessLink";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { processDocuments } from "@/features/upload/services/uploadService";
+import { processDocuments } from "@/features/upload/services/uploadService"; // Corrected import path for uploadService!
 import { getFindings } from "@/features/findings/services/findingsService";
 import { getReportUrl } from "@/features/report/services/reportService";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
