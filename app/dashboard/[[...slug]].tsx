@@ -1,25 +1,29 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import React, { useCallback } from "react";
+import { useParams } from "next/navigation";
 import AccessLinkGuard from "@/components/layouts/AccessLinkGuard";
 import FileUpload from "@/components/shared/FileUpload/FileUpload";
-import ImageViewer from "@/components/shared/ImageViewer/ImageViewer"; // Corrected import path
-import FindingsSummary from "@/components/shared/FindingsSummary/FindingsSummary"; // Corrected import path - and now component exists!
+import ImageViewer from "@/components/shared/ImageViewer/ImageViewer";
+import FindingsSummary from "@/components/shared/FindingsSummary/FindingsSummary";
 import ReportPreview from "@/components/shared/ReportPreview/ReportPreview";
-import Disclaimer from "@/components/ui/Disclaimer/Disclaimer"; // Corrected import path - and now component exists!
-import ExternalResources from "@/components/shared/ExternalResources/ExternalResources"; // Corrected import path - and now component exists!
+import Disclaimer from "@/components/ui/Disclaimer/Disclaimer";
+import ExternalResources from "@/components/shared/ExternalResources/ExternalResources";
 import { Button } from "@/components/ui/button";
 import { useAccessLink } from "@/hooks/useAccessLink";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { processDocuments } from "@/features/upload/services/uploadService"; // Corrected import path for uploadService!
-import { getFindings } from "@/features/findings/services/findingsService";
-import { getReportUrl } from "@/features/report/services/reportService";
+import { processDocuments } from "@/dashboard/features/upload/services/uploadService"; // Import processDocuments ONLY
+import { UploadResponseData } from "@/types/api"; // Import UploadResponseData from types/api.ts
+// (Removed erroneous import of Finding)
+import { getFindings } from "@/dashboard/features/findings/services/findingsService";
+import { getReportUrl } from "@/dashboard/features/report/services/reportService";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
-import ErrorBoundary from "@/components/shared/ErrorBoundary"; // Import ErrorBoundary
+import ErrorBoundary from "@/components/shared/ErrorBoundary/ErrorBoundary";
+
+import { Finding } from "@/types/findings";
 
 /**
  * @component DashboardPage
@@ -29,9 +33,8 @@ import ErrorBoundary from "@/components/shared/ErrorBoundary"; // Import ErrorBo
  * @returns {JSX.Element} - Dashboard page UI.
  */
 const DashboardPage: React.FC = () => {
-  const router = useRouter();
-  const { slug } = router.query;
-  const [files, setFiles] = useState<File[]>([]);
+  const params = useParams();
+  const slug = params?.slug;
   const linkId = Array.isArray(slug) ? slug[0] : slug;
 
   const {
@@ -39,14 +42,23 @@ const DashboardPage: React.FC = () => {
     isLoading: isLinkLoading,
     error: linkError,
   } = useAccessLink(linkId || "");
-  const { mutate: process, isLoading: isProcessing } =
-    useMutation(processDocuments);
+  const { mutate: process, isPending: isProcessing } = useMutation<
+    UploadResponseData,
+    Error,
+    FormData
+  >({
+    mutationFn: processDocuments,
+  });
   const {
     data: findingsData,
-    isLoading: isLoadingFindings,
     error: findingsError,
     refetch,
-  } = useQuery(["findings", linkId], () => getFindings(linkId || ""), {
+  } = useQuery<Finding[]>({
+    queryKey: ["findings", linkId],
+    queryFn: async () => {
+      const response = await getFindings(linkId || "");
+      return response.findings || [];
+    },
     enabled: false,
     retry: false,
   });
@@ -56,7 +68,9 @@ const DashboardPage: React.FC = () => {
     isLoading: isLoadingReport,
     error: reportError,
     refetch: refetchReportUrl,
-  } = useQuery(["reportUrl", linkId], () => getReportUrl(linkId || ""), {
+  } = useQuery({
+    queryKey: ["reportUrl", linkId],
+    queryFn: () => getReportUrl(linkId || ""),
     enabled: false,
     retry: false,
   });
@@ -72,7 +86,6 @@ const DashboardPage: React.FC = () => {
   const handleFilesUploaded = useCallback(
     async (newFiles: File[]) => {
       // Use useCallback
-      setFiles(newFiles);
       if (linkId) {
         const formData = new FormData();
         newFiles.forEach((file) => formData.append("files", file));
@@ -82,11 +95,13 @@ const DashboardPage: React.FC = () => {
             onSuccess: () => {
               refetch();
               refetchReportUrl();
-              toast.success(t("common.success"), {
-                description: t("dashboard.processing_documents"),
-              }); // More informative success toast
+              toast.success(
+                `${t("common.success")} - ${t(
+                  "dashboard.processing_documents"
+                )}`
+              ); // More informative success toast
             },
-            onError: (error: any) => {
+            onError: (error: Error) => {
               console.error(
                 "Error processing documents for linkId:",
                 linkId,
@@ -99,8 +114,8 @@ const DashboardPage: React.FC = () => {
               );
             },
           });
-        } catch (error: any) {
-          // Explicitly type error as any for catch block
+        } catch (error: Error | unknown) {
+          // Properly typed error handling
           console.error(
             "Unexpected error in handleFilesUploaded for linkId:",
             linkId,
@@ -207,21 +222,30 @@ const DashboardPage: React.FC = () => {
                   />
                 ))}
 
-              {reportUrl && (
-                <>
-                  <ReportPreview pdfUrl={reportUrl} />
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      if (typeof window !== "undefined") {
-                        window.open(reportUrl, "_blank");
-                      }
-                    }}
-                    className="mt-4"
-                  >
-                    {t("download_report_button")}
-                  </Button>
-                </>
+              {isLoadingReport ? (
+                <div className="flex items-center justify-center p-4">
+                  <Loader2
+                    className="animate-spin text-gray-600 h-8 w-8"
+                    aria-label={t("common.loading")}
+                  />
+                </div>
+              ) : (
+                reportUrl && (
+                  <>
+                    <ReportPreview pdfUrl={reportUrl} />
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          window.open(reportUrl, "_blank");
+                        }
+                      }}
+                      className="mt-4"
+                    >
+                      {t("download_report_button")}
+                    </Button>
+                  </>
+                )
               )}
             </>
           </ErrorBoundary>

@@ -8,8 +8,9 @@ export interface UploadRequestData {
 }
 
 export interface UploadResponseData {
+  // <-- UploadResponseData is here
   message: string;
-  uploadId: string; // Or the actual field name from your API response
+  uploadId: string;
   // ... any other fields from a successful upload response
 }
 
@@ -25,6 +26,7 @@ export interface ReportResponseData {
 
 // Example Finding type - adjust to match your actual data structure
 export interface Finding {
+  // <-- Finding is here too, or move to findingTypes.ts as in step 1 and import here
   finding_id: string;
   file_id: string;
   finding_type: string;
@@ -37,6 +39,7 @@ export interface Finding {
 
 // Example ImageAnnotation type - adjust to match your actual data structure
 export interface ImageAnnotation {
+  // <-- ImageAnnotation is here
   x: number;
   y: number;
   width: number;

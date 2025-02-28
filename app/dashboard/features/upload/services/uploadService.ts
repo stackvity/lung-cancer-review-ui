@@ -17,7 +17,8 @@ export const processDocuments = async (
     const response = await apiClient.post("/upload", formData, {
       // Adjust endpoint if necessary
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data", // Correct Content-Type for FormData
+        // 'X-Access-Link' header will be handled by the API gateway / middleware
       },
     });
 
